@@ -1,0 +1,6 @@
+framework module PowerBaseLibrary {
+  umbrella header "PowerBaseLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}

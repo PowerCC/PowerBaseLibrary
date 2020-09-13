@@ -1,0 +1,56 @@
+{
+  "name": "WeddingBaseLibrary",
+  "version": "0.1.2",
+  "summary": "PowerCC WeddingBaseLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "http://git.hunli.baihe.com/zoucheng/WeddingBaseLibrary.git",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "zoucheng@live.cn": "zoucheng@baihe.com"
+  },
+  "source": {
+    "git": "http://git.hunli.baihe.com/zoucheng/WeddingBaseLibrary.git",
+    "tag": "0.1.2"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source_files": "WeddingBaseLibrary/Classes/**/*",
+  "swift_versions": "5.0",
+  "dependencies": {
+    "Alamofire": [
+      "~> 4.9.1"
+    ],
+    "CTMediator": [
+
+    ],
+    "HandyJSON": [
+
+    ],
+    "JSONModel": [
+
+    ],
+    "MBProgressHUD": [
+
+    ],
+    "MJRefresh": [
+
+    ],
+    "Moya": [
+
+    ],
+    "RxCocoa": [
+
+    ],
+    "RxSwift": [
+
+    ],
+    "SDWebImage": [
+
+    ]
+  },
+  "swift_version": "5.0"
+}
