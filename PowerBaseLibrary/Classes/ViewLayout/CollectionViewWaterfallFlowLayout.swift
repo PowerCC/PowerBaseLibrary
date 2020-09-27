@@ -13,15 +13,15 @@ import Foundation
     @objc optional func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: CollectionViewWaterfallFlowLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
 }
 
-public class CollectionViewWaterfallFlowLayout: UICollectionViewFlowLayout {
+open class CollectionViewWaterfallFlowLayout: UICollectionViewFlowLayout {
     // 总列数
-    var columnCount: Int = 0
+    open var columnCount: Int = 0
 
     // 整个高度
     private var maxH: Int?
 
     // 头部高度
-    var headerH: CGFloat = 0
+    open var headerH: CGFloat = 0
 
     // 所有item的属性
     fileprivate var layoutAttributesArray = [UICollectionViewLayoutAttributes]()

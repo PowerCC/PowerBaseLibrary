@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CollectionViewAlignLeftFlowViewLayout: UICollectionViewFlowLayout {
+open class CollectionViewAlignLeftFlowViewLayout: UICollectionViewFlowLayout {
     override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         // 1.获取系统计算好的attributes
         guard let systemAttribues = super.layoutAttributesForElements(in: rect) else {return nil}

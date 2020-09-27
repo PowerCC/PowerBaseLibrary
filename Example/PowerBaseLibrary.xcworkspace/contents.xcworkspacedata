@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/zoucheng/Documents/Code/Git/PowerBaseLibrary/Example/PowerBaseLibrary.xcodeproj">
+      location = "group:PowerBaseLibrary.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
