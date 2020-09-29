@@ -27,7 +27,7 @@ public extension UILabel {
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
 
         // 垂直或者水平，value是 NSNumber，0表示水平，1垂直
-        if verticalGlyphForm > 0 {
+        if verticalGlyphForm >= 0 {
             attributedString.addAttribute(NSAttributedString.Key.verticalGlyphForm, value: verticalGlyphForm, range: rang)
         }
 
@@ -61,7 +61,7 @@ public extension UILabel {
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
 
         // 垂直或者水平，value是 NSNumber，0表示水平，1垂直
-        if verticalGlyphForm > 0 {
+        if verticalGlyphForm >= 0 {
             attributedString.addAttribute(NSAttributedString.Key.verticalGlyphForm, value: verticalGlyphForm, range: rang)
         }
 
