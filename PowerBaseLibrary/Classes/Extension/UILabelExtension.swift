@@ -10,13 +10,13 @@ import Foundation
 
 public extension UILabel {
     func textWithUnderline(text: String, color: UIColor) {
-        let attrStr = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: self.font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.strikethroughColor: color])
+        let attrStr = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.strikethroughColor: color])
 
         attributedText = attrStr
     }
 
     /// 调整行间距
-    func lineSpacingWithString(_ string: String, lineSpace: CGFloat) -> NSAttributedString {
+    func lineSpacingWithString(_ string: String, lineSpace: CGFloat, verticalGlyphForm: Int = -1) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: string)
         let paragraphStye = NSMutableParagraphStyle()
 
@@ -26,13 +26,16 @@ public extension UILabel {
         let rang = NSMakeRange(0, CFStringGetLength(string as CFString?))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
 
-        // attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStye, range: rang)
+        // 垂直或者水平，value是 NSNumber，0表示水平，1垂直
+        if verticalGlyphForm > 0 {
+            attributedString.addAttribute(NSAttributedString.Key.verticalGlyphForm, value: verticalGlyphForm, range: rang)
+        }
 
         return attributedString
     }
 
     /// 调整带图行间距
-    func lineSpacingWithImageString(_ string: String, lineSpace: CGFloat, image: UIImage, imageRect: CGRect, insertIndex: Int = 0) -> NSAttributedString {
+    func lineSpacingWithImageString(_ string: String, lineSpace: CGFloat, image: UIImage, imageRect: CGRect, insertIndex: Int = 0, verticalGlyphForm: Int = -1) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: string)
         let paragraphStye = NSMutableParagraphStyle()
 
@@ -56,6 +59,11 @@ public extension UILabel {
 
         let rang = NSMakeRange(0, CFStringGetLength(string as CFString?))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
+
+        // 垂直或者水平，value是 NSNumber，0表示水平，1垂直
+        if verticalGlyphForm > 0 {
+            attributedString.addAttribute(NSAttributedString.Key.verticalGlyphForm, value: verticalGlyphForm, range: rang)
+        }
 
         return attributedString
     }
@@ -94,7 +102,6 @@ public extension UILabel {
      *
      */
     func textAlignmentLeftAndRightWith(labelWidth: CGFloat) {
-        
         guard let text = self.text, text.count > 0 else {
             DEBUGLOG("text没有内容")
             return
@@ -111,19 +118,19 @@ public extension UILabel {
 
         let starIndex = text.index(text.startIndex, offsetBy: text.count - 1)
         let lastStr = text.suffix(from: starIndex)
-        
+
         if (lastStr == ":") || (lastStr == "：") {
-             length = text.count - 2
+            length = text.count - 2
         }
 
         let maragin = Int((Float(labelWidth) - Float(size.width)) / Float(length))
-        
+
         let number = NSNumber(value: maragin)
 
         let attribute = NSMutableAttributedString(string: text)
 
         attribute.addAttribute(NSAttributedString.Key.kern, value: number, range: NSRange(location: 0, length: length))
-        
+
         attributedText = attribute
     }
 }
