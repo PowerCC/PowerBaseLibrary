@@ -8,21 +8,11 @@
 import Foundation
 import MBProgressHUD
 
-public let ERROR_GENERAL_MSG = "出错啦，请稍后再试~(>_<)~"
-
-public let ERROR_GET_CODE_MSG = "获取验证码出错，请稍后再试~(>_<)~"
-
-public let ERROR_LOGIN_MSG = "登录出错，请稍后再试~(>_<)~"
-
-public let ERROR_SUBMIT_MSG = "提交失败，请稍后再试~(>_<)~"
-
-public let ERROR_UPLOAD_AVATAR_MSG = "上传头像出错，请重试~(>_<)~"
-
-public let ERROR_UPLOAD_IMAGE_MSG = "上传照片出错，请重试~(>_<)~"
+public let MSG_ERROR_GENERAL = "出错啦，请稍后再试~(>_<)~"
 
 // MARK: - showPrompt
 
-public func showPrompt(_ text: String?, superView: UIView, numberOfLines: Int = 0, afterDelay: TimeInterval = 1.5, darkStyle: Bool = true, completion: MBProgressHUDCompletionBlock? = nil) {
+public func showPrompt(_ text: String?, superView: UIView, numberOfLines: Int = 0, afterDelay: TimeInterval = 2, darkStyle: Bool = true, completion: MBProgressHUDCompletionBlock? = nil) {
     if text != nil {
         let hud = MBProgressHUD.showAdded(to: superView, animated: true)
         hud.bezelView.style = .solidColor
@@ -62,7 +52,7 @@ public func showPromptWithSuccessImage(_ text: String?, superView: UIView, darkS
         hud.label.font = UIFont(name: SYSTEM_FONT_LIGHT, size: 14) ?? UIFont.systemFont(ofSize: 14)
         hud.offset = CGPoint(x: 0.0, y: (superView.frame.size.height - hud.frame.size.height) / 2.0)
         hud.removeFromSuperViewOnHide = true
-        hud.hide(animated: true, afterDelay: 1.5)
+        hud.hide(animated: true, afterDelay: 2)
     }
 }
 
@@ -86,6 +76,6 @@ public func showPromptWithFailedImage(_ text: String?, superView: UIView, darkSt
         hud.label.font = UIFont(name: SYSTEM_FONT_LIGHT, size: 14) ?? UIFont.systemFont(ofSize: 14)
         hud.offset = CGPoint(x: 0.0, y: (superView.frame.size.height - hud.frame.size.height) / 2.0)
         hud.removeFromSuperViewOnHide = true
-        hud.hide(animated: true, afterDelay: 1.5)
+        hud.hide(animated: true, afterDelay: 2)
     }
 }

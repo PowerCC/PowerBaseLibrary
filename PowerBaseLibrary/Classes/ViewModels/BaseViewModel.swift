@@ -206,7 +206,7 @@ open class BaseObjectViewModel: NSObject {
                     viewModel(model)
                 } else {
                     let model = type.init()
-                    model.initCodeMsg(code: "-1", msg: ERROR_GENERAL_MSG)
+                    model.initCodeMsg(code: "-1", msg: MSG_ERROR_GENERAL)
                     viewModel(model)
                 }
             } else {
@@ -243,7 +243,7 @@ open class BaseObjectViewModel: NSObject {
                     viewModels(models)
                 } else {
                     let model = type.init()
-                    model.initCodeMsg(code: "-1", msg: ERROR_GENERAL_MSG)
+                    model.initCodeMsg(code: "-1", msg: MSG_ERROR_GENERAL)
                     viewModels([model])
                 }
             } else {
