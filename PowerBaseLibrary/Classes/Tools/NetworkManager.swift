@@ -12,7 +12,7 @@ public class NetworkManager {
     // shared instance
     public static let shared = NetworkManager()
     
-    public let reachabilityManager = NetworkReachabilityManager(host: "hlapp.hunli.baihe.com")
+    public let reachabilityManager = NetworkReachabilityManager(host: "www.baidu.com")
     
     public func startNetworkReachabilityObserver() {
         reachabilityManager?.listener = { status in
