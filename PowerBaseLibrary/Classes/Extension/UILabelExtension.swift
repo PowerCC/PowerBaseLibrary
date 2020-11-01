@@ -16,12 +16,15 @@ public extension UILabel {
     }
 
     /// 调整行间距
-    func lineSpacingWithString(_ string: String, lineSpace: CGFloat, verticalGlyphForm: Int = -1) -> NSAttributedString {
+    func lineSpacingWithString(_ string: String, lineSpace: CGFloat, alignment: NSTextAlignment = .left, verticalGlyphForm: Int = -1) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: string)
         let paragraphStye = NSMutableParagraphStyle()
 
         // 调整行间距
         paragraphStye.lineSpacing = lineSpace
+
+        // 对齐方式
+        paragraphStye.alignment = alignment
 
         let rang = NSMakeRange(0, CFStringGetLength(string as CFString?))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
@@ -35,7 +38,7 @@ public extension UILabel {
     }
 
     /// 调整带图行间距
-    func lineSpacingWithImageString(_ string: String, lineSpace: CGFloat, image: UIImage, imageRect: CGRect, insertIndex: Int = 0, verticalGlyphForm: Int = -1) -> NSAttributedString {
+    func lineSpacingWithImageString(_ string: String, lineSpace: CGFloat, alignment: NSTextAlignment = .left, image: UIImage, imageRect: CGRect, insertIndex: Int = 0, verticalGlyphForm: Int = -1) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: string)
         let paragraphStye = NSMutableParagraphStyle()
 
@@ -56,6 +59,9 @@ public extension UILabel {
 
         // 调整行间距
         paragraphStye.lineSpacing = lineSpace
+        
+        // 对齐方式
+        paragraphStye.alignment = alignment
 
         let rang = NSMakeRange(0, CFStringGetLength(string as CFString?))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStye, range: rang)
