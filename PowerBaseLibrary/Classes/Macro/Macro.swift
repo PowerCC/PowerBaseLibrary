@@ -10,6 +10,7 @@ import Foundation
 import LocalAuthentication
 import Photos
 import UserNotifications
+import MediaPlayer
 
 // MARK: --------------------------------- 我是分割线 -------------------------
 
@@ -324,6 +325,12 @@ public var SERVICE_PHONE_NUMBER = CITY_SERVICE_NUMBER_DEFAULT
 /// 通知权限
 public var NOTIFICATION_IS_ENABLE: Bool = false
 
+/// 媒体库权限
+public var MEDIA_LIBRARY_STATUS: MPMediaLibraryAuthorizationStatus = .denied
+
+/// 麦克风权限
+public var MICROPHONE_STATUS: AVAuthorizationStatus = .denied
+
 /// 相机权限
 public var CAMERA_STATUS: AVAuthorizationStatus = .denied
 
@@ -392,6 +399,82 @@ public func notificationIsEnable(action: @escaping (() -> Void), ungrantedAction
     })
 }
 
+// MARK: - 检测媒体库访问权限
+
+public func checkMediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    if MPMediaLibrary.authorizationStatus() == .authorized {
+        MEDIA_LIBRARY_STATUS = .authorized
+        action()
+    } else {
+        MPMediaLibrary.requestAuthorization { (authStatus) in
+            MEDIA_LIBRARY_STATUS = authStatus
+            
+            if authStatus == .restricted {
+                // 应用受内容和隐私访问限制
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "访问媒体库权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+                    let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                    alert.addAction(okAction)
+
+                    vc.present(alert, animated: true, completion: nil)
+                }
+            } else if authStatus == .denied {
+                // 用户未授权
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "访问媒体库权限未开启", message: "请在系统（设置->隐私->媒体与 Apple Music）中启用。", preferredStyle: UIAlertController.Style.alert)
+                    let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                    alert.addAction(okAction)
+
+                    vc.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                // 已授权
+                action()
+            }
+        }
+    }
+}
+
+// MARK: - 检测麦克风访问权限
+
+public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
+    CAMERA_STATUS = authStatus
+
+    if authStatus == .notDetermined {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
+            if granted {
+                CAMERA_STATUS = .authorized
+                DispatchQueue.main.async(execute: {
+                    // 已授权
+                    action()
+                })
+            }
+        }
+    } else if authStatus == .restricted {
+        // 应用受内容和隐私访问限制
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okAction)
+
+            vc.present(alert, animated: true, completion: nil)
+        }
+    } else if authStatus == .denied {
+        // 用户未授权
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "访问相机权限未开启", message: "请在系统（设置->隐私->相机）中启用。", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okAction)
+
+            vc.present(alert, animated: true, completion: nil)
+        }
+    } else {
+        // 已授权
+        action()
+    }
+}
+
 // MARK: - 检测相机访问权限
 
 public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
@@ -409,9 +492,9 @@ public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping 
             }
         }
     } else if authStatus == .restricted {
-        // 应用受限制，家长控制
+        // 应用受内容和隐私访问限制
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受限制，请查看（家长控制）和（设置->隐私->相机）。", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
             alert.addAction(okAction)
 
@@ -427,10 +510,8 @@ public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping 
             vc.present(alert, animated: true, completion: nil)
         }
     } else {
-        DispatchQueue.main.async(execute: {
-            // 已授权
-            action()
-        })
+        // 已授权
+        action()
     }
 }
 
@@ -451,9 +532,9 @@ public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
             }
         }
     } else if authStatus == .restricted {
-        // 应用受限制，家长控制
+        // 应用受内容和隐私访问限制
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问照片权限未开启", message: "应用受限制，请查看（家长控制）和（设置->隐私->照片）。", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "访问照片权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
             alert.addAction(okAction)
 
@@ -469,40 +550,8 @@ public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
             vc.present(alert, animated: true, completion: nil)
         }
     } else {
-        DispatchQueue.main.async(execute: {
-            // 已授权
-            action()
-        })
-    }
-}
-
-// MARK: - 指纹登录
-
-public func loginWithTouchID() {
-    let context = LAContext()
-    let reasonString = "将使用您的TouchID登录百合婚礼"
-    var error: NSError?
-
-    if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-        context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in // 放到主线程执行，这里特别重要
-                if success {
-                    DEBUGLOG("牛逼了")
-                } else {
-                    DEBUGLOG(evalPolicyError?.localizedDescription)
-                }
-            })
-        })
-    } else {
-        switch error!.code {
-        case LAError.Code.biometryLockout.rawValue:
-            DEBUGLOG("您还没有保存TouchID指纹")
-        case LAError.Code.passcodeNotSet.rawValue:
-            DEBUGLOG("您还没有设置密码")
-        default:
-            DEBUGLOG("TouchID不可用")
-        }
-        DEBUGLOG(error?.localizedDescription)
+        // 已授权
+        action()
     }
 }
 
