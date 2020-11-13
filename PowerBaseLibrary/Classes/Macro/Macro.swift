@@ -402,36 +402,38 @@ public func notificationIsEnable(action: @escaping (() -> Void), ungrantedAction
 // MARK: - 检测媒体库访问权限
 
 public func mediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
-    if MPMediaLibrary.authorizationStatus() == .authorized {
-        MEDIA_LIBRARY_STATUS = .authorized
-        action()
-    } else {
+    let authStatus = MPMediaLibrary.authorizationStatus()
+    MEDIA_LIBRARY_STATUS = authStatus
+    if authStatus == .notDetermined {
         MPMediaLibrary.requestAuthorization { (authStatus) in
-            MEDIA_LIBRARY_STATUS = authStatus
-            
-            if authStatus == .restricted {
-                // 应用受内容和隐私访问限制
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "访问媒体库权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
-                    let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-                    alert.addAction(okAction)
+            if authStatus == .authorized {
+                MEDIA_LIBRARY_STATUS = authStatus
 
-                    vc.present(alert, animated: true, completion: nil)
-                }
-            } else if authStatus == .denied {
-                // 用户未授权
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "访问媒体库权限未开启", message: "请在系统（设置->隐私->媒体与 Apple Music）中启用。", preferredStyle: UIAlertController.Style.alert)
-                    let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-                    alert.addAction(okAction)
-
-                    vc.present(alert, animated: true, completion: nil)
-                }
-            } else {
                 // 已授权
                 action()
             }
         }
+    } else if authStatus == .restricted {
+        // 应用受内容和隐私访问限制
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "访问媒体库权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okAction)
+
+            vc.present(alert, animated: true, completion: nil)
+        }
+    } else if authStatus == .denied {
+        // 用户未授权
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "访问媒体库权限未开启", message: "请在系统（设置->隐私->媒体与 Apple Music）中启用。", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okAction)
+
+            vc.present(alert, animated: true, completion: nil)
+        }
+    } else {
+        // 已授权
+        action()
     }
 }
 
@@ -445,10 +447,9 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             if granted {
                 CAMERA_STATUS = .authorized
-                DispatchQueue.main.async(execute: {
-                    // 已授权
-                    action()
-                })
+
+                // 已授权
+                action()
             }
         }
     } else if authStatus == .restricted {
@@ -485,10 +486,9 @@ public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping 
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             if granted {
                 CAMERA_STATUS = .authorized
-                DispatchQueue.main.async(execute: {
-                    // 已授权
-                    action()
-                })
+                
+                // 已授权
+                action()
             }
         }
     } else if authStatus == .restricted {
@@ -525,10 +525,9 @@ public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
         PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
                 PHOTO_LIBRARY_STATUS = .authorized
-                DispatchQueue.main.async(execute: {
-                    // 已授权
-                    action()
-                })
+
+                // 已授权
+                action()
             }
         }
     } else if authStatus == .restricted {
