@@ -401,7 +401,7 @@ public func notificationIsEnable(action: @escaping (() -> Void), ungrantedAction
 
 // MARK: - 检测媒体库访问权限
 
-public func checkMediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+public func mediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
     if MPMediaLibrary.authorizationStatus() == .authorized {
         MEDIA_LIBRARY_STATUS = .authorized
         action()
