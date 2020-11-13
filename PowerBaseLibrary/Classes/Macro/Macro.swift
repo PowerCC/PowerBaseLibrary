@@ -454,7 +454,7 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
     } else if authStatus == .restricted {
         // 应用受内容和隐私访问限制
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "访问麦克风权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
             alert.addAction(okAction)
 
@@ -463,7 +463,7 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
     } else if authStatus == .denied {
         // 用户未授权
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问相机权限未开启", message: "请在系统（设置->隐私->相机）中启用。", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "访问麦克风权限未开启", message: "请在系统（设置->隐私->麦克风）中启用。", preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
             alert.addAction(okAction)
 
