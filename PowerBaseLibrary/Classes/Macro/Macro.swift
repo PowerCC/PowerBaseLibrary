@@ -326,16 +326,16 @@ public var SERVICE_PHONE_NUMBER = CITY_SERVICE_NUMBER_DEFAULT
 public var NOTIFICATION_IS_ENABLE: Bool = false
 
 /// 媒体库权限
-public var MEDIA_LIBRARY_STATUS: MPMediaLibraryAuthorizationStatus = .denied
+public var MEDIA_LIBRARY_STATUS: MPMediaLibraryAuthorizationStatus = MPMediaLibrary.authorizationStatus()
 
 /// 麦克风权限
-public var MICROPHONE_STATUS: AVAuthorizationStatus = .denied
+public var MICROPHONE_STATUS: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
 
 /// 相机权限
-public var CAMERA_STATUS: AVAuthorizationStatus = .denied
+public var CAMERA_STATUS: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 
 /// 照片库权限
-public var PHOTO_LIBRARY_STATUS: PHAuthorizationStatus = .denied
+public var PHOTO_LIBRARY_STATUS: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
 
 // MARK: - callPhoneNumber
 
@@ -385,52 +385,54 @@ public func isBSGS(_ cityCode: String) -> Bool {
 
 // MARK: - 检测通知权限
 
-public func notificationIsEnable(action: @escaping (() -> Void), ungrantedAction: @escaping (() -> Void)) {
+public func notificationIsEnable(action: @escaping ((Bool) -> Void)) {
     let center = UNUserNotificationCenter.current()
     center.requestAuthorization(options: [UNAuthorizationOptions.badge, UNAuthorizationOptions.sound, UNAuthorizationOptions.alert], completionHandler: { granted, _ in
         NOTIFICATION_IS_ENABLE = granted
-        if granted {
-            // 已授权
-            action()
-        } else {
-            // 未授权
-            ungrantedAction()
-        }
+        action(granted)
     })
 }
 
 // MARK: - 检测媒体库访问权限
 
 public func mediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    func showStatusPrompt(authStatus: MPMediaLibraryAuthorizationStatus) {
+        if authStatus == .restricted {
+            // 应用受内容和隐私访问限制
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问媒体库权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        } else if authStatus == .denied {
+            // 用户未授权
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问媒体库权限未开启", message: "请在系统（设置->隐私->媒体与 Apple Music）中启用。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     let authStatus = MPMediaLibrary.authorizationStatus()
-    MEDIA_LIBRARY_STATUS = authStatus
+    
     if authStatus == .notDetermined {
         MPMediaLibrary.requestAuthorization { (authStatus) in
             if authStatus == .authorized {
-                MEDIA_LIBRARY_STATUS = authStatus
-
                 // 已授权
                 action()
+            } else {
+                showStatusPrompt(authStatus: .denied)
             }
         }
     } else if authStatus == .restricted {
-        // 应用受内容和隐私访问限制
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问媒体库权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else if authStatus == .denied {
-        // 用户未授权
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问媒体库权限未开启", message: "请在系统（设置->隐私->媒体与 Apple Music）中启用。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else {
         // 已授权
         action()
@@ -440,36 +442,43 @@ public func mediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
 // MARK: - 检测麦克风访问权限
 
 public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    func showStatusPrompt(authStatus: AVAuthorizationStatus) {
+        if authStatus == .restricted {
+            // 应用受内容和隐私访问限制
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问麦克风权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        } else if authStatus == .denied {
+            // 用户未授权
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问麦克风权限未开启", message: "请在系统（设置->隐私->麦克风）中启用。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        } 
+    }
+    
     let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
-    CAMERA_STATUS = authStatus
 
     if authStatus == .notDetermined {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             if granted {
-                CAMERA_STATUS = .authorized
-
                 // 已授权
                 action()
+            } else {
+                showStatusPrompt(authStatus: .denied)
             }
         }
     } else if authStatus == .restricted {
-        // 应用受内容和隐私访问限制
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问麦克风权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else if authStatus == .denied {
-        // 用户未授权
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问麦克风权限未开启", message: "请在系统（设置->隐私->麦克风）中启用。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else {
         // 已授权
         action()
@@ -479,36 +488,43 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
 // MARK: - 检测相机访问权限
 
 public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    func showStatusPrompt(authStatus: AVAuthorizationStatus) {
+        if authStatus == .restricted {
+            // 应用受内容和隐私访问限制
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        } else if authStatus == .denied {
+            // 用户未授权
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问相机权限未开启", message: "请在系统（设置->隐私->相机）中启用。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+
+                vc.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-    CAMERA_STATUS = authStatus
 
     if authStatus == .notDetermined {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             if granted {
-                CAMERA_STATUS = .authorized
-                
                 // 已授权
                 action()
+            } else {
+                showStatusPrompt(authStatus: .denied)
             }
         }
     } else if authStatus == .restricted {
-        // 应用受内容和隐私访问限制
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问相机权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else if authStatus == .denied {
-        // 用户未授权
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问相机权限未开启", message: "请在系统（设置->隐私->相机）中启用。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else {
         // 已授权
         action()
@@ -518,36 +534,43 @@ public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping 
 // MARK: - 检测相册访问权限
 
 public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @escaping (() -> Void)) {
+    func showStatusPrompt(authStatus: PHAuthorizationStatus) {
+        if authStatus == .restricted {
+            // 应用受内容和隐私访问限制
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问照片权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+                
+                vc.present(alert, animated: true, completion: nil)
+            }
+        } else if authStatus == .denied {
+            // 用户未授权
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "访问照片权限未开启", message: "请在系统（设置->隐私->照片）中启用。", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
+                alert.addAction(okAction)
+                
+                vc.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     let authStatus = PHPhotoLibrary.authorizationStatus()
-    PHOTO_LIBRARY_STATUS = authStatus
 
     if authStatus == .notDetermined {
         PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
-                PHOTO_LIBRARY_STATUS = .authorized
-
-                // 已授权
+                
                 action()
+            } else {
+                showStatusPrompt(authStatus: .denied)
             }
         }
     } else if authStatus == .restricted {
-        // 应用受内容和隐私访问限制
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问照片权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else if authStatus == .denied {
-        // 用户未授权
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "访问照片权限未开启", message: "请在系统（设置->隐私->照片）中启用。", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
-            alert.addAction(okAction)
-
-            vc.present(alert, animated: true, completion: nil)
-        }
+        showStatusPrompt(authStatus: authStatus)
     } else {
         // 已授权
         action()
