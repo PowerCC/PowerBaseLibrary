@@ -467,7 +467,7 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
     let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
 
     if authStatus == .notDetermined {
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
+        AVCaptureDevice.requestAccess(for: AVMediaType.audio) { granted in
             if granted {
                 // 已授权
                 action()
