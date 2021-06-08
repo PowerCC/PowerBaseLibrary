@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "CTMediator+HandyTools.h"
 #import "CTMediator.h"
 
 FOUNDATION_EXPORT double CTMediatorVersionNumber;
