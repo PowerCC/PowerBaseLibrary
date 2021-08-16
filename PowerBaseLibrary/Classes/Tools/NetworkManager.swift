@@ -15,16 +15,16 @@ public class NetworkManager {
     public let reachabilityManager = NetworkReachabilityManager(host: Bundle.main.infoDictionary?["ReachabilityDomain"] as? String ?? "www.baidu.com")
 
     public func startNetworkReachabilityObserver() {
-        reachabilityManager?.listener = { status in
+        reachabilityManager?.startListening(onUpdatePerforming: { status in
             switch status {
             case .reachable(.ethernetOrWiFi):
                 DEBUGLOG("The network is reachable over the WiFi connection")
                 CONNECTION_TYPE = .ethernetOrWiFi
                 NotificationCenter.default.post(name: Notification.Name(rawValue: N_APP_NETWORK_AVAILABLE), object: nil)
 
-            case .reachable(.wwan):
+            case .reachable(.cellular):
                 DEBUGLOG("The network is reachable over the WWAN connection")
-                CONNECTION_TYPE = .wwan
+                CONNECTION_TYPE = .cellular
                 NotificationCenter.default.post(name: Notification.Name(rawValue: N_APP_NETWORK_AVAILABLE), object: nil)
 
             case .notReachable:
@@ -34,13 +34,10 @@ public class NetworkManager {
             case .unknown:
                 DEBUGLOG("It is unknown whether the network is reachable")
             }
-        }
+        })
 
         if reachabilityManager?.isReachable == false {
             NotificationCenter.default.post(name: Notification.Name(rawValue: N_APP_NETWORK_UNAVAILABLE), object: nil)
         }
-
-        // start listening
-        reachabilityManager?.startListening()
     }
 }

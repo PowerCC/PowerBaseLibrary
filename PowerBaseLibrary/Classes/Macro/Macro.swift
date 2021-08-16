@@ -174,7 +174,7 @@ public let SECTION_ZERO_HF: CGFloat = 0.001
 // MARK: --------------------------------- 我是分割线 -------------------------
 
 /// 网络类型
-public var CONNECTION_TYPE = NetworkReachabilityManager.ConnectionType.wwan
+public var CONNECTION_TYPE = NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType.ethernetOrWiFi
 
 /// 登录VC是否出现
 public var LOGIN_VC_EXISTING = false
