@@ -1,0 +1,94 @@
+{
+  "buildCommand" : "prepareForIndexing",
+  "configuredTargets" : [
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c15738ba3679b4c4428e6a6d83c5308d3af99b"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c157382e7c6947981a8aaf5cd4558837efebb4"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c15738ccf8d2e7b76835803f385c319c420ae9"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c15738d2937ea25acbc2c0736921fb3c376757"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c15738e7b390481eed36e82336f0f81154713e"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c157383c17a3bfe89d9569c9fae6fd53f1dc2e"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c1573841d366d981e4233eaafa9a008d15a5cd"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c157389b9df1a9380348c091c99e37962f3752"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c1573804d8a8ed30a504f845a3b7cd97c5bb0d"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c157380daa2e2cd26ad5ca345c3044f7db418b"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c157384f96f1021f5250ab30d486e660411efe"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c1573891ffb250f3b44ffb9b452226d52e9fa9"
+    },
+    {
+      "guid" : "1ce82316d9c9c6edb2b99d5f27c15738c46180aea4e87057640961e6db37df0d"
+    }
+  ],
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64e",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : true,
+      "platform" : "iphoneos",
+      "sdk" : "iphoneos14.5",
+      "sdkVariant" : "iphoneos",
+      "supportedArchitectures" : [
+        "armv4t",
+        "armv5",
+        "armv6",
+        "armv7",
+        "armv7f",
+        "armv7s",
+        "armv7k",
+        "arm64",
+        "arm64e"
+      ],
+      "targetArchitecture" : "arm64e"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/zoucheng/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/zoucheng/Library/Developer/Xcode/DerivedData/Pods-avvngbptmlhjuzfeyutmvnbaxvmu/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/zoucheng/Library/Developer/Xcode/DerivedData/Pods-avvngbptmlhjuzfeyutmvnbaxvmu/Index/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

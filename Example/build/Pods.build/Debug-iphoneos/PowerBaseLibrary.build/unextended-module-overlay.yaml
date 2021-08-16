@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/zoucheng/Documents/Code/Git/PowerBaseLibrary/Example/build/Debug-iphoneos/PowerBaseLibrary/PowerBaseLibrary.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/zoucheng/Documents/Code/Git/PowerBaseLibrary/Example/build/Pods.build/Debug-iphoneos/PowerBaseLibrary.build/unextended-module.modulemap",
+    }]
+  }]
+}
