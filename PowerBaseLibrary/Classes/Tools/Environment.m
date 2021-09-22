@@ -98,7 +98,12 @@ static Environment *sharedInst = nil;
     if ([platform isEqualToString:@"iPhone13,2"]) return @"iPhone 12";
     if ([platform isEqualToString:@"iPhone13,3"]) return @"iPhone 12 Pro";
     if ([platform isEqualToString:@"iPhone13,4"]) return @"iPhone 12 Pro Max";
-
+    
+    if ([platform isEqualToString:@"iPhone14,2"]) return @"iPhone 13 Pro";
+    if ([platform isEqualToString:@"iPhone14,3"]) return @"iPhone 13 Pro Max";
+    if ([platform isEqualToString:@"iPhone14,4"]) return @"iPhone 13 mini";
+    if ([platform isEqualToString:@"iPhone14,5"]) return @"iPhone 13";
+    
     if ([platform isEqualToString:@"iPod1,1"]) return @"iPod Touch (A1213)";
     if ([platform isEqualToString:@"iPod2,1"]) return @"iPod touch (2th generation)";
     if ([platform isEqualToString:@"iPod3,1"]) return @"iPod touch (3th generation)";
@@ -167,17 +172,31 @@ static Environment *sharedInst = nil;
     if ([platform isEqualToString:@"iPad8,10"]) return @"iPad Pro (11-inch) (2nd generation)";
     if ([platform isEqualToString:@"iPad8,11"]) return @"iPad Pro (12.9-inch) (4th generation)";
     if ([platform isEqualToString:@"iPad8,12"]) return @"iPad Pro (12.9-inch) (4th generation)";
-
+    
     if ([platform isEqualToString:@"iPad11,1"]) return @"iPad mini (5th generation) (A2133)";
     if ([platform isEqualToString:@"iPad11,2"]) return @"iPad mini (5th generation) (A2124/A2125/A2126)";
     if ([platform isEqualToString:@"iPad11,3"]) return @"iPad Air (3rd generation) (A2152)";
     if ([platform isEqualToString:@"iPad11,4"]) return @"iPad Air (3rd generation) (A2123/A2153/A2154)";
     if ([platform isEqualToString:@"iPad11,6"]) return @"iPad (8th generation) (A2270)";
     if ([platform isEqualToString:@"iPad11,7"]) return @"iPad (8th generation) (A2428/A2429/A2430)";
-
+    
+    if ([platform isEqualToString:@"iPad12,1"]) return @"iPad (9th generation)";
+    if ([platform isEqualToString:@"iPad12,2"]) return @"iPad (9th generation) (A2603/A2604/A2605)";
+    
     if ([platform isEqualToString:@"iPad13,1"]) return @"iPad Air (4th generation)";
     if ([platform isEqualToString:@"iPad13,2"]) return @"iPad Air (4th generation) (A2324/A2072)";
-
+    if ([platform isEqualToString:@"iPad13,4"]) return @"iPad Pro (11-inch) (3rd generation)";
+    if ([platform isEqualToString:@"iPad13,5"]) return @"iPad Pro (11-inch) (3rd generation)";
+    if ([platform isEqualToString:@"iPad13,6"]) return @"iPad Pro (11-inch) (3rd generation)";
+    if ([platform isEqualToString:@"iPad13,7"]) return @"iPad Pro (11-inch) (3rd generation)";
+    if ([platform isEqualToString:@"iPad13,8"]) return @"iPad Pro (12.9-inch) (5th generation)";
+    if ([platform isEqualToString:@"iPad13,9"]) return @"iPad Pro (12.9-inch) (5th generation)";
+    if ([platform isEqualToString:@"iPad13,10"]) return @"iPad Pro (12.9-inch) (5th generation)";
+    if ([platform isEqualToString:@"iPad13,11"]) return @"iPad Pro (12.9-inch) (5th generation)";
+    
+    if ([platform isEqualToString:@"iPad14,1"]) return @"iPad mini (6th generation)";
+    if ([platform isEqualToString:@"iPad14,2"]) return @"iPad mini (6th generation)";
+    
     if ([platform isEqualToString:@"i386"]) return @"iPhone Simulator (i386)";
     if ([platform isEqualToString:@"x86_64"]) return @"iPhone Simulator (x86_64)";
     return platform;

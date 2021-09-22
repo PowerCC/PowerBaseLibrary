@@ -1,0 +1,40 @@
+Target dependency graph (13 targets)
+Alamofire in Pods
+CTMediator in Pods
+HandyJSON in Pods
+JSONModel in Pods
+MBProgressHUD in Pods
+MJRefresh in Pods
+Moya in Pods, depends on:
+Alamofire in Pods (explicit)
+RxSwift in Pods
+RxRelay in Pods, depends on:
+RxSwift in Pods (explicit)
+RxCocoa in Pods, depends on:
+RxRelay in Pods (explicit)
+RxSwift in Pods (explicit)
+SDWebImage in Pods
+PowerBaseLibrary in Pods, depends on:
+Alamofire in Pods (explicit)
+CTMediator in Pods (explicit)
+HandyJSON in Pods (explicit)
+JSONModel in Pods (explicit)
+MBProgressHUD in Pods (explicit)
+MJRefresh in Pods (explicit)
+Moya in Pods (explicit)
+RxCocoa in Pods (explicit)
+RxSwift in Pods (explicit)
+SDWebImage in Pods (explicit)
+Pods-PowerBaseLibrary_Tests in Pods, depends on:
+Alamofire in Pods (explicit)
+CTMediator in Pods (explicit)
+HandyJSON in Pods (explicit)
+JSONModel in Pods (explicit)
+MBProgressHUD in Pods (explicit)
+MJRefresh in Pods (explicit)
+Moya in Pods (explicit)
+PowerBaseLibrary in Pods (explicit)
+RxCocoa in Pods (explicit)
+RxRelay in Pods (explicit)
+RxSwift in Pods (explicit)
+SDWebImage in Pods (explicit)
