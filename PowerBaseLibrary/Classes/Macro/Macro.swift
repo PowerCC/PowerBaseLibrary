@@ -8,11 +8,11 @@
 import Alamofire
 import Foundation
 import LocalAuthentication
+import MediaPlayer
 import Photos
 import UserNotifications
-import MediaPlayer
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 /// AppVersion
 public let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
@@ -80,13 +80,13 @@ public enum DeviceType: Int {
 
         /// iPhone XS Max 机型（@3x图）
         iPhoneXS_Max,
-        
+
         /// iPhone 12 13 mini 机型（@3x图）
         iPhone12_13mini,
-        
+
         /// iPhone 12 13 机型（@3x图）、iPhone 12 Pro 机型（@3x图）
         iPhone12_13Pro,
-        
+
         /// iPhone 12 13 Pro Max 机型（@3x图）
         iPhone12_13Pro_Max,
 
@@ -97,19 +97,19 @@ public enum DeviceType: Int {
 public func currentDeviceType() -> DeviceType {
     iPhoneX_Series = false
 
-    if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 480.0)) {
+    if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 480.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 480.0, height: 320)) {
         // iPhone 4S 机型
         return DeviceType.iPhone4S
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 568.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 568.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 568.0, height: 320.0)) {
         // iPhone5, iPhone SE 机型
         return DeviceType.iPhone5_SE
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 667.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 667.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 667.0, height: 375.0)) {
         // iPhone6, iPhone7, iPhone8 机型
         return DeviceType.iPhone6_7_8
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 736.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 736.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 736.0, height: 414.0)) {
         // iPhone6 Plus, iPhone7 Plus, iPhone8 Plus 机型
         return DeviceType.iPhone6_7_8Plus
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 896.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 896.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 896.0, height: 414.0)) {
         iPhoneX_Series = true
 
         if UIScreen.main.scale == 2 {
@@ -122,24 +122,24 @@ public func currentDeviceType() -> DeviceType {
             // 未知设备不支持
             return DeviceType.nonSupport
         }
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 812.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 812.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 812.0, height: 375.0)) {
         iPhoneX_Series = true
 
         // iPhone X, iPhone XS 机型
         return DeviceType.iPhoneX_XS
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 360.0, height: 780.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 360.0, height: 780.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 780.0, height: 360.0)) {
         iPhoneX_Series = true
-        
+
         // iPhone 12 13 mini 机型
         return DeviceType.iPhone12_13mini
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 390.0, height: 844.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 390.0, height: 844.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 844.0, height: 390.0)) {
         iPhoneX_Series = true
-        
+
         // iPhone 12 13 机型、iPhone 12 13 Pro 机型
         return DeviceType.iPhone12_13Pro
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 428.0, height: 926.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 428.0, height: 926.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 926.0, height: 428.0)) {
         iPhoneX_Series = true
-        
+
         // iPhone 12 13 Pro Max 机型
         return DeviceType.iPhone12_13Pro_Max
     }
@@ -171,7 +171,7 @@ public let DETAILVC_SECTION_GAP: CGFloat = 8.0
 /// Tableview Section Header & Footer 高度为0时 需要设置为接近于0的小数，如果设置为0则显示默认高度
 public let SECTION_ZERO_HF: CGFloat = 0.001
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 /// 网络类型
 public var CONNECTION_TYPE = NetworkReachabilityManager.NetworkReachabilityStatus.ConnectionType.ethernetOrWiFi
@@ -188,7 +188,7 @@ public let NORMAL_PAGE_SIZE = 20
 /// IM数据是否同步完成
 public var IM_SYNC_OK = false
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 // MARK: - 查找顶层控制器、
 
@@ -238,7 +238,7 @@ public func RGBA(_ r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
     return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
 }
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 /// 遮罩色
 public let MASK_COLOR = RGBA(0, g: 0, b: 0, a: 0.5)
@@ -319,7 +319,7 @@ public func collectCountCheck(count: String?) -> String? {
 // 请柬分享用默认URL
 public let INVITATION_DEFAULT_ICON_URL_FOR_SHARE = "https://m.hunli.baihe.com/static/img/invitationDefault.png"
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 /// AppStore ID
 #if WeddingTarget
@@ -394,7 +394,7 @@ public func callPhoneNumber(viewController vc: UIViewController?, number: String
     }
 }
 
-// MARK: --------------------------------- 我是分割线 -------------------------
+// MARK: - -------------------------------- 我是分割线 -------------------------
 
 // MARK: - 是否（北上广深）
 
@@ -441,11 +441,11 @@ public func mediaLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
             }
         }
     }
-    
+
     let authStatus = MPMediaLibrary.authorizationStatus()
-    
+
     if authStatus == .notDetermined {
-        MPMediaLibrary.requestAuthorization { (authStatus) in
+        MPMediaLibrary.requestAuthorization { authStatus in
             if authStatus == .authorized {
                 // 已授权
                 action()
@@ -485,9 +485,9 @@ public func microphoneAuthorizationStatus(_ vc: UIViewController, action: @escap
 
                 vc.present(alert, animated: true, completion: nil)
             }
-        } 
+        }
     }
-    
+
     let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
 
     if authStatus == .notDetermined {
@@ -533,7 +533,7 @@ public func cameraAuthorizationStatus(_ vc: UIViewController, action: @escaping 
             }
         }
     }
-    
+
     let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 
     if authStatus == .notDetermined {
@@ -565,7 +565,7 @@ public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
                 let alert = UIAlertController(title: "访问照片权限未开启", message: "应用受内容和隐私访问限制。", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
                 alert.addAction(okAction)
-                
+
                 vc.present(alert, animated: true, completion: nil)
             }
         } else if authStatus == .denied {
@@ -574,18 +574,17 @@ public func photoLibraryAuthorizationStatus(_ vc: UIViewController, action: @esc
                 let alert = UIAlertController(title: "访问照片权限未开启", message: "请在系统（设置->隐私->照片）中启用。", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default, handler: nil)
                 alert.addAction(okAction)
-                
+
                 vc.present(alert, animated: true, completion: nil)
             }
         }
     }
-    
+
     let authStatus = PHPhotoLibrary.authorizationStatus()
 
     if authStatus == .notDetermined {
         PHPhotoLibrary.requestAuthorization { status in
             if status == .authorized {
-                
                 action()
             } else {
                 showStatusPrompt(authStatus: .denied)
@@ -610,12 +609,12 @@ public func appIconBadgeNumber() -> Int {
 
 // MARK: - 更新App图标右上角数字
 
-//func updateAppIconBadgeNumber(_ number: Int) {
+// func updateAppIconBadgeNumber(_ number: Int) {
 //    let app = UIApplication.shared
 //    let settings = UIUserNotificationSettings(types: UIUserNotificationType.badge, categories: nil)
 //    app.registerUserNotificationSettings(settings)
 //    app.applicationIconBadgeNumber = number
-//}
+// }
 
 // MARK: - 从 Storyboard 获得 ViewController 实例
 
