@@ -81,14 +81,14 @@ public enum DeviceType: Int {
         /// iPhone XS Max 机型（@3x图）
         iPhoneXS_Max,
         
-        /// iPhone 12 mini 机型（@3x图）
-        iPhone12_mini,
+        /// iPhone 12 13 mini 机型（@3x图）
+        iPhone12_13mini,
         
-        /// iPhone 12 机型（@3x图）、iPhone 12 Pro 机型（@3x图）
-        iPhone12_12Pro,
+        /// iPhone 12 13 机型（@3x图）、iPhone 12 Pro 机型（@3x图）
+        iPhone12_13Pro,
         
-        /// iPhone 12 Pro Max 机型（@3x图）
-        iPhone12_Pro_Max,
+        /// iPhone 12 13 Pro Max 机型（@3x图）
+        iPhone12_13Pro_Max,
 
         /// 未知设备不支持
         nonSupport
@@ -130,18 +130,18 @@ public func currentDeviceType() -> DeviceType {
     } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 360.0, height: 780.0)) {
         iPhoneX_Series = true
         
-        // iPhone 12 mini 机型
-        return DeviceType.iPhone12_mini
+        // iPhone 12 13 mini 机型
+        return DeviceType.iPhone12_13mini
     } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 390.0, height: 844.0)) {
         iPhoneX_Series = true
         
-        // iPhone 12 机型、iPhone 12 Pro 机型
-        return DeviceType.iPhone12_12Pro
+        // iPhone 12 13 机型、iPhone 12 13 Pro 机型
+        return DeviceType.iPhone12_13Pro
     } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 428.0, height: 926.0)) {
         iPhoneX_Series = true
         
-        // iPhone 12 Pro Max 机型
-        return DeviceType.iPhone12_Pro_Max
+        // iPhone 12 13 Pro Max 机型
+        return DeviceType.iPhone12_13Pro_Max
     }
 
     // 未知设备不支持
