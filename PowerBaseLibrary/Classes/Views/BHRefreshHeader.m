@@ -63,7 +63,6 @@
     [self insertSubview:self.refreshTitleLabel aboveSubview:self.gifView];
     
     self.mj_h = MJRefreshHeaderHeight + self.refreshTitleLabelHeight + self.refreshTitleLabelBottom + self.refreshTitleLabelGap;
-    
 }
 
 - (void)placeSubviews

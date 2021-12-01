@@ -7,6 +7,7 @@
 //
 
 #import <MJRefresh/MJRefreshGifHeader.h>
+#import <MJRefresh/UIView+MJExtension.h>
 
 @interface BHRefreshHeader : MJRefreshGifHeader
 
