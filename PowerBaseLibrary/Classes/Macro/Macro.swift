@@ -127,7 +127,7 @@ public func currentDeviceType() -> DeviceType {
 
         // iPhone X, iPhone XS 机型
         return DeviceType.iPhoneX_XS
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 360.0, height: 780.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 780.0, height: 360.0)) {
+    } else if __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 1080.0, height:  2340.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 2340.0, height: 1080.0)) {
         iPhoneX_Series = true
 
         // iPhone 12 13 mini 机型
