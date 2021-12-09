@@ -122,16 +122,16 @@ public func currentDeviceType() -> DeviceType {
             // 未知设备不支持
             return DeviceType.nonSupport
         }
+    } else if __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 1080.0, height: 2340.0)) || __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 2340.0, height: 1080.0)) {
+        iPhoneX_Series = true
+
+        // iPhone 12 13 mini 机型
+        return DeviceType.iPhone12_13mini
     } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 812.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 812.0, height: 375.0)) {
         iPhoneX_Series = true
 
         // iPhone X, iPhone XS 机型
         return DeviceType.iPhoneX_XS
-    } else if __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 1080.0, height:  2340.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 2340.0, height: 1080.0)) {
-        iPhoneX_Series = true
-
-        // iPhone 12 13 mini 机型
-        return DeviceType.iPhone12_13mini
     } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 390.0, height: 844.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 844.0, height: 390.0)) {
         iPhoneX_Series = true
 
