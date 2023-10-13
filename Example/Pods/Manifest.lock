@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (5.4.4)
-  - CTMediator (46)
+  - Alamofire (5.8.0)
+  - CTMediator (48)
   - HandyJSON (5.0.2)
   - JSONModel (1.8.0)
   - MBProgressHUD (1.2.0)
@@ -9,7 +9,7 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - PowerBaseLibrary (1.1.0):
+  - PowerBaseLibrary (1.1.1):
     - Alamofire
     - CTMediator
     - HandyJSON
@@ -20,15 +20,15 @@ PODS:
     - RxCocoa
     - RxSwift
     - SDWebImage
-  - RxCocoa (6.2.0):
-    - RxRelay (= 6.2.0)
-    - RxSwift (= 6.2.0)
-  - RxRelay (6.2.0):
-    - RxSwift (= 6.2.0)
-  - RxSwift (6.2.0)
-  - SDWebImage (5.12.1):
-    - SDWebImage/Core (= 5.12.1)
-  - SDWebImage/Core (5.12.1)
+  - RxCocoa (6.6.0):
+    - RxRelay (= 6.6.0)
+    - RxSwift (= 6.6.0)
+  - RxRelay (6.6.0):
+    - RxSwift (= 6.6.0)
+  - RxSwift (6.6.0)
+  - SDWebImage (5.18.3):
+    - SDWebImage/Core (= 5.18.3)
+  - SDWebImage/Core (5.18.3)
 
 DEPENDENCIES:
   - PowerBaseLibrary (from `../`)
@@ -52,19 +52,19 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
-  CTMediator: f1cf58d509fb3192086c367711f039efd769b907
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+  CTMediator: 3f3578b525b3a46a7a2f92a99922ec40363f4269
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  PowerBaseLibrary: e693d87f5168163410715b934dda6b898ca18cb4
-  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
-  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
-  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
+  PowerBaseLibrary: c6a081b30e94529a06499a34e12bd5ac22b53572
+  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
+  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
+  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
+  SDWebImage: 96e0c18ef14010b7485210e92fac888587ebb958
 
-PODFILE CHECKSUM: 541956c24fb9d8857abcaa5e101e7d645d5f7103
+PODFILE CHECKSUM: 2bc26ea534c4c21a3d006699a0cc00b14a423068
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.13.0
