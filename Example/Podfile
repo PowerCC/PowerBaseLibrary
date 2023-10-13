@@ -1,17 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '12.0'
+platform :ios, '13.0'
 use_frameworks!
 target 'PowerBaseLibrary_Tests' do
   pod 'PowerBaseLibrary', :path => '../'
-end
-
-post_install do |installer|
-    installer.generated_projects.each do |project|
-          project.targets.each do |target|
-              target.build_configurations.each do |config|
-                  config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-               end
-          end
-   end
 end
