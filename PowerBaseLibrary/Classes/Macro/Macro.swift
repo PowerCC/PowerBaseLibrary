@@ -45,107 +45,31 @@ public func SCALE_HEIGHT_3_TO_1(width: CGFloat = SCREEN_BOUNDS.width) -> CGFloat
     return width / 3
 }
 
-/// 是否 iPhone X 系列（iPhone X, iPhone XR, iPhone XS, iPhone XS Max 机型）
-public func isiPhoneXSeries() -> Bool {
-    _ = currentDeviceType()
-
-    if iPhoneX_Series {
-        return true
-    }
-
-    return false
-}
-
 fileprivate var iPhoneX_Series: Bool = false
 
-public enum DeviceType: Int {
-    case
-        /// iPhone4S 机型（@2x图）
-        iPhone4S,
-
-        /// iPhone5, iPhone SE 机型（@2x图）
-        iPhone5_SE,
-
-        /// iPhone6, iPhone7, iPhone8（@2x图）
-        iPhone6_7_8,
-
-        /// iPhone6 Plus, iPhone7 Plus, iPhone8 Plus（@3x图）
-        iPhone6_7_8Plus,
-
-        /// iPhoneXR 机型（@2x图）
-        iPhoneXR_11,
-
-        /// iPhone X, iPhone XS 机型（@3x图）
-        iPhoneX_XS,
-
-        /// iPhone XS Max 机型（@3x图）
-        iPhoneXS_Max,
-
-        /// iPhone 12 13 mini 机型（@3x图）
-        iPhone12_13mini,
-
-        /// iPhone 12 13 机型（@3x图）、iPhone 12 Pro 机型（@3x图）
-        iPhone12_13Pro,
-
-        /// iPhone 12 13 Pro Max 机型（@3x图）
-        iPhone12_13Pro_Max,
-
-        /// 未知设备不支持
-        nonSupport
-}
-
-public func currentDeviceType() -> DeviceType {
-    iPhoneX_Series = false
-
-    if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 480.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 480.0, height: 320)) {
-        // iPhone 4S 机型
-        return DeviceType.iPhone4S
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 320.0, height: 568.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 568.0, height: 320.0)) {
-        // iPhone5, iPhone SE 机型
-        return DeviceType.iPhone5_SE
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 667.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 667.0, height: 375.0)) {
-        // iPhone6, iPhone7, iPhone8 机型
-        return DeviceType.iPhone6_7_8
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 736.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 736.0, height: 414.0)) {
-        // iPhone6 Plus, iPhone7 Plus, iPhone8 Plus 机型
-        return DeviceType.iPhone6_7_8Plus
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 414.0, height: 896.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 896.0, height: 414.0)) {
-        iPhoneX_Series = true
-
-        if UIScreen.main.scale == 2 {
-            // iPhone XR 机型, iPhone 11 机型
-            return DeviceType.iPhoneXR_11
-        } else if UIScreen.main.scale == 3 {
-            // iPhone XS Max 机型
-            return DeviceType.iPhoneXS_Max
-        } else {
-            // 未知设备不支持
-            return DeviceType.nonSupport
+public func isiPhoneXOrLater() -> Bool {
+    var result = false
+    
+    if #available(iOS 13.0, *) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            if window.safeAreaInsets.top > 20 {
+                result = true
+            }
+        } else if let window = UIApplication.shared.keyWindow {
+            if window.safeAreaInsets.top > 20 {
+                result = true
+            }
         }
-    } else if __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 1080.0, height: 2340.0)) || __CGSizeEqualToSize(UIScreen.main.nativeBounds.size, CGSize(width: 2340.0, height: 1080.0)) {
-        iPhoneX_Series = true
-
-        // iPhone 12 13 mini 机型
-        return DeviceType.iPhone12_13mini
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 375.0, height: 812.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 812.0, height: 375.0)) {
-        iPhoneX_Series = true
-
-        // iPhone X, iPhone XS 机型
-        return DeviceType.iPhoneX_XS
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 390.0, height: 844.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 844.0, height: 390.0)) {
-        iPhoneX_Series = true
-
-        // iPhone 12 13 机型、iPhone 12 13 Pro 机型
-        return DeviceType.iPhone12_13Pro
-    } else if __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 428.0, height: 926.0)) || __CGSizeEqualToSize(UIScreen.main.bounds.size, CGSize(width: 926.0, height: 428.0)) {
-        iPhoneX_Series = true
-
-        // iPhone 12 13 Pro Max 机型
-        return DeviceType.iPhone12_13Pro_Max
+    } else {
+        if let window = UIApplication.shared.keyWindow {
+            if window.safeAreaInsets.top > 20 {
+                result = true
+            }
+        }
     }
-
-    // 未知设备不支持
-    return DeviceType.nonSupport
+    
+    return result
 }
 
 public var NAV_BAR_MAX_Y: CGFloat = 0.0
