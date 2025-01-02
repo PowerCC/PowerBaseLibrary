@@ -25,7 +25,7 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'zoucheng@live.cn' => 'zoucheng@live.cn' }
-  s.source           = { :git => 'https://github.com/PowerCC/PowerBaseLibrary.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/PowerCC/PowerBaseLibrary.git', :tag => s.version.to_s, :git => 'https://github.com/Miles-Matheson/HandyJSON.git', :tag => s.version.to_s }
   
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
