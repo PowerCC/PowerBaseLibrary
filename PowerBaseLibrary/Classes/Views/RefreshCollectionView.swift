@@ -88,13 +88,15 @@ open class RefreshCollectionView: UICollectionView {
     }
 
     open func downRefresh() {
-        refreshDelegate?.downRefresh?()
+        if disableDownRefresh == false {
+            if mj_footer?.isRefreshing == false {
+                refreshDelegate?.downRefresh?()
+            }
+        }
     }
 
     open func upRefresh() {
-        if disableDownRefresh == true {
-            refreshDelegate?.upRefresh?()
-        } else {
+        if disableDownRefresh == false {
             if mj_header?.isRefreshing == false {
                 refreshDelegate?.upRefresh?()
             }
