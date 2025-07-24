@@ -1,10 +1,10 @@
 PODS:
-  - Alamofire (5.8.0)
+  - Alamofire (5.10.2)
   - CTMediator (48)
   - HandyJSON (5.0.2)
   - JSONModel (1.8.0)
   - MBProgressHUD (1.2.0)
-  - MJRefresh (3.7.5)
+  - MJRefresh (3.7.9)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -20,15 +20,15 @@ PODS:
     - RxCocoa
     - RxSwift
     - SDWebImage
-  - RxCocoa (6.6.0):
-    - RxRelay (= 6.6.0)
-    - RxSwift (= 6.6.0)
-  - RxRelay (6.6.0):
-    - RxSwift (= 6.6.0)
-  - RxSwift (6.6.0)
-  - SDWebImage (5.18.3):
-    - SDWebImage/Core (= 5.18.3)
-  - SDWebImage/Core (5.18.3)
+  - RxCocoa (6.9.0):
+    - RxRelay (= 6.9.0)
+    - RxSwift (= 6.9.0)
+  - RxRelay (6.9.0):
+    - RxSwift (= 6.9.0)
+  - RxSwift (6.9.0)
+  - SDWebImage (5.21.1):
+    - SDWebImage/Core (= 5.21.1)
+  - SDWebImage/Core (5.21.1)
 
 DEPENDENCIES:
   - PowerBaseLibrary (from `../`)
@@ -52,19 +52,19 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   CTMediator: 3f3578b525b3a46a7a2f92a99922ec40363f4269
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  MJRefresh: ff9e531227924c84ce459338414550a05d2aea78
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   PowerBaseLibrary: 14b0233317e766325cbcdcfd0510290812a26639
-  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
-  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
-  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
-  SDWebImage: 96e0c18ef14010b7485210e92fac888587ebb958
+  RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
+  RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
+  RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
+  SDWebImage: f29024626962457f3470184232766516dee8dfea
 
 PODFILE CHECKSUM: 61db352889f4a1e1a2fadf24a5389a9fc9c4e50f
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

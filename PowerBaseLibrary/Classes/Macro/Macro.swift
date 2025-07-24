@@ -240,35 +240,7 @@ public func collectCountCheck(count: String?) -> String? {
     return count
 }
 
-// 请柬分享用默认URL
-public let INVITATION_DEFAULT_ICON_URL_FOR_SHARE = "https://m.hunli.baihe.com/static/img/invitationDefault.png"
-
 // MARK: - -------------------------------- 我是分割线 -------------------------
-
-/// AppStore ID
-#if WeddingTarget
-    let APP_STORE_ID = "1086884575"
-#else
-    let APP_STORE_ID = "791486098"
-#endif
-
-/// AppStore url
-public let APP_STORE_URL = "https://itunes.apple.com/cn/app/%E7%99%BE%E5%90%88%E7%BD%91%E5%A9%9A%E7%A4%BC-%E7%94%A8%E5%BF%83%E7%9A%84%E5%A9%9A%E5%BA%86%E7%AD%96%E5%88%92%E6%9C%8D%E5%8A%A1/id1086884575?mt=8"
-
-/// 默认城市（北京）
-public let DEFAULT_CITY_CODE = "110000"
-
-/// 全国CityCode
-public let NATION_CITY_CODE = "100000"
-
-/// 默认服务电话（全国为空时用的客服电话）
-public let CITY_SERVICE_NUMBER_BEIJING = "400-697-0096"
-
-/// 默认服务电话
-public var CITY_SERVICE_NUMBER_DEFAULT = CITY_SERVICE_NUMBER_BEIJING
-
-/// 服务电话号码
-public var SERVICE_PHONE_NUMBER = CITY_SERVICE_NUMBER_DEFAULT
 
 /// 通知权限
 public var NOTIFICATION_IS_ENABLE: Bool = false
@@ -319,17 +291,6 @@ public func callPhoneNumber(viewController vc: UIViewController?, number: String
 }
 
 // MARK: - -------------------------------- 我是分割线 -------------------------
-
-// MARK: - 是否（北上广深）
-
-/// 是否（北上广深）
-public func isBSGS(_ cityCode: String) -> Bool {
-    if cityCode.hasPrefix("110") || cityCode.hasPrefix("310") || cityCode.hasPrefix("4401") || cityCode.hasPrefix("4403") {
-        return true
-    }
-
-    return false
-}
 
 // MARK: - 检测通知权限
 
